@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+}
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #fff;
+height: 60vh;
+}
+.message
+{
+max-width: 500px;
+}
+h1 {
+font-size: 24px;
+}
+p {
+font-size: 16px;
+} 
