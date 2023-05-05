@@ -20,7 +20,7 @@ const SearchBar = () => {
         <FormControl position={"relative"}>
           <InputGroup>
             <InputLeftAddon children={<AiOutlineSearch />} />
-            <Input value={input.search} name={"search"} onChange={handleInput} type={"input"} placeholder={"Search..."} minW="600px" />
+            <Input value={input.search} name={"search"} onChange={handleInput} type={"input"} placeholder={"Search..."} minW="600px"/>
           </InputGroup>
           {visible ? <SearchResultBox /> : ""}
         </FormControl>

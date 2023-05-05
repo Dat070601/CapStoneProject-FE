@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const searchByNameAsync = async (url, { name, type }) => {
+const searchByNameAsync = async (url, { name }) => {
   try {
-    const response = await axios.get(`${url}/api/search?name=${name}&type=${type}`)
+    const response = await axios.get(`${url}/api/search?nameSearch=${name}`)
     return response.data
   } catch (error) {
     console.log(error)

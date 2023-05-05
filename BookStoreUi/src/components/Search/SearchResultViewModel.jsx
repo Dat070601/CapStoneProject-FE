@@ -41,7 +41,6 @@ const SearchResultViewModel = () => {
   useEffect(() => {
     dispatch(searchByNameAsyncThunk({
       name: input.search || params.keyword,
-      type: "product"
     }))
   }, [input.search])
 

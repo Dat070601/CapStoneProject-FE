@@ -22,10 +22,10 @@ const SearchResultBox = () => {
     >
       {results.length !== 0 ? results.map(result => {
         return (
-          <Box as={"button"} onClick={() => navigate(`/product/${result.productId}`)} w="100%" mt="1px" border={`1px ${COLOR} solid`} p={["20px", "20px"]}>
+          <Box as={"button"} onClick={() => navigate(`/product/${result.id}`)} w="100%" mt="1px" border={`1px ${COLOR} solid`} p={["20px", "20px"]}>
             <Text
               textAlign={"left"}          
-            ><Link to={`/product/${result.productId}`}>{result.productName}</Link>
+            ><Link to={`/product/${result.id}`}>{result.title}</Link>
             </Text>
           </Box>
         )     

@@ -12,26 +12,27 @@ const Search = () => {
   return (
     <Box  bg={'gray.100'} minHeight = {"280vh"} pb={"100px"}>
       <Container maxW={"container.xl"}>
-        <Box mt="20px">
-          <Text color={COLOR} fontWeight={"medium"}>Search result: <Text color={"black"}>{results.length} results</Text></Text>
+        <Box mt="20px" display={'flex'} gap={'10px'}>
+          <Text color={COLOR} fontWeight={"medium"}>Đã tìm được </Text>
+          <Text color={"black"}>{results.length} Kết quả</Text>
         </Box>
         {results.length !== 0 ? <Box mb="100px" display={"flex"} flexWrap="wrap" gap={"50px"}>
           {results.map(book => {
             return (
               <Card 
-                productId={book.productId}
-                productName={book.productName}  
-                imageUrl = {book.images[0]?.imageURL} 
-                productPrice = {book.productVariants[0]?.productSalePrice} 
+                productId={book.id}
+                productName={book.title}  
+                imageUrl = {book.imageUrl} 
+                productPrice = {book.price} 
                 sold = {book.sold}
                 quantities = {book.quantity}
-                vendorName = {book.vendorName}
-                variantQuantities = {book.productVariants?.length}
               />
             )
           })}
-        </Box> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} pt="250px">
-          <Text fontWeight={"light"} color={COLOR} fontSize={"45px"}>No result found...</Text>
+        </Box> : 
+        <Box display={"flex"} justifyContent={"center"} alignItems={"center"} pt="250px" gap={'10px'}>
+          <Text fontWeight={"light"} color={COLOR} fontSize={"45px"}>Xin lỗi, chúng tôi không tìm thấy kết quả cho</Text>
+          <Text fontSize={"45px"} color={'tomato'} fontWeight={"semibold"}>{keyword}</Text>
         </Box> }
       </Container>
     </Box>

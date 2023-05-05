@@ -5,8 +5,7 @@ import { URL } from "../../constant";
 const searchByNameAsyncThunk = createAsyncThunk("search/search-by-name", async (payload) => {
   try {
     const response = await searchByNameAsync(URL, {
-      name: payload.name,
-      type: payload.type
+      name: payload.name
     })
     return response
   } catch (error) {
