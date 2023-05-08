@@ -67,7 +67,6 @@ const App = () => {
 				<Route path='/search/:keyword' element={<Search />}></Route>
 				<Route path='/payment-success' element={<PaymentResult />}></Route>
 			</Routes>
-			<Footer/>
 		</div>
 	);
 };

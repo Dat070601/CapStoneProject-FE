@@ -1,4 +1,4 @@
-import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription } from '@chakra-ui/react'
+import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Tfoot, Td } from '@chakra-ui/react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { AiOutlineMinus } from 'react-icons/ai'
 import React, { useEffect, useState } from 'react'
@@ -38,7 +38,7 @@ const ProductDetail = () => {
   console.log(variantSelected)
 
   return (
-    <div className='bg'>
+    <Box bg={'gray.100'} minHeight = {"100%"} pb={"100px"}>
       { visible ? (
         <Alert status={isSuccessInCart == true ? 'success' : 'error'}>
           <AlertIcon />
@@ -55,7 +55,7 @@ const ProductDetail = () => {
           <BreadcrumbItem>
               <Link to={"/"}>
                 <Text fontWeight={"semibold"} color={COLOR}>
-                  {book.productName}
+                  {book.title}
                 </Text>
               </Link>
           </BreadcrumbItem>
@@ -64,19 +64,19 @@ const ProductDetail = () => {
           <Carousel width={"350px"}>
             {book.images?.map(image => {
               return (
-                <img src={image.imageURL} />
+                <img src={image.imageUrl} />
               )
             })}
           </Carousel>
           <Box ml="20px">
-            <Text color={COLOR} fontWeight={"semibold"} fontSize={"25px"}>{book.productName}</Text>
+            <Text color={COLOR} fontWeight={"semibold"} fontSize={"25px"}>{book.title}</Text>
             <Divider mt="10px" width={"500px"}/>
             <Box mt="10px">
-              <Text color="gray.600">Sold: {Intl.NumberFormat('de-DE').format(book.sold)} products</Text>
+              <Text color="gray.600">Đã bán: {Intl.NumberFormat('de-DE').format(book.sold)} sản phẩm </Text>
               <HStack mt="10px" gap={"20px"}>
-                <Text fontSize={"25px"} color={"tomato"}> {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(productPrice)}</Text>
-                <Text decoration={"line-through"} fontSize={"23px"} color={"gray.300"}>{Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(productDefaultPrice)}</Text>
-                <Text color={COLOR}>(You saved: {Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(productDefaultPrice - productPrice)})</Text>
+                <Text fontSize={"25px"} color={"tomato"}> {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(book.salePrice)}</Text>
+                <Text decoration={"line-through"} fontSize={"23px"} color={"gray.300"}>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(book.defaultPrice)}</Text>
+                <Text color={COLOR}>(Bạn đã tiết kiệm: {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(book.defaultPrice - book.salePrice)})</Text>
               </HStack>
             </Box>
             <Divider mt="10px" width={"500px"}/>
@@ -99,32 +99,9 @@ const ProductDetail = () => {
                   <Icon as={AiOutlinePlus}/>
                 </Button>
                 <Box>
-                  <Text>Quantity: {Intl.NumberFormat('de-DE').format(existQuantity)} products</Text>
+                  <Text>Số lượng còn lại: {Intl.NumberFormat('de-DE').format(book.quantity)} sản phẩm</Text>
                 </Box>
               </HStack>
-            <Divider mt="10px" width={"500px"}/>
-            <HStack mt="10px" gap={"10px"}>
-            {book.productVariants?.map(variant => {
-              return (
-                <Button 
-                  color={variant.productVariantName == variantSelected ? "white" : COLOR}
-                  bg={variant.productVariantName == variantSelected ? COLOR : ""}
-                  variant={"outline"}
-                  onClick={() => {
-                    handleVariantSelected(variant.productVariantName)
-                    handleSelectVariant({
-                      salePrice: variant.productSalePrice,
-                      defaultPrice: variant.productDefaultPrice,
-                      existQuantity: variant.quantity
-                    })
-                    getVariantId(variant.productVariantId)
-                  }}
-                >
-                  {variant.productVariantName}
-                </Button>
-              )
-            })}
-            </HStack>
             <Divider mt="10px" width={"500px"}/>
             <VStack mt="30px" gap="10px">
             <Button 
@@ -164,10 +141,42 @@ const ProductDetail = () => {
             </VStack>
           </Box>
         </Flex>
+        <Box rounded={"20px"} boxShadow={"xl"} bg="white" mt="20px" padding={"20px"}>
+          <Text fontSize={'xl'} color={COLOR} as = {'em'}>Thông tin chi tiết sản phẩm: </Text>
+          <Box mt={'10px'}> 
+            <TableContainer  border={'1px'} borderRadius={'10px'} borderColor={'gray.100'}>
+              <Table variant='striped' colorScheme='teal'>
+                <TableCaption>Imperial to metric conversion factors</TableCaption>
+                <Tbody >
+                  <Tr>
+                    <Td>Tác giả</Td>
+                    <Td>{book.author}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Nhà xuất bảm</Td>
+                    <Td>{book.publisher}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Thể loại</Td>
+                    <Td>{book.categoryName}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Số trang</Td>
+                    <Td>{book.numPage}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Tóm tắt</Td>
+                    <Td><Box maxW={'400px'} h={'fit-content'} overflowWrap={'break-word'} flex flexWrap={'wrapcd BookUi'}>{book.description}</Box></Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Box>
+        </Box>
       </Container>) : (
         <Loading />
       )}
-    </div>
+    </Box>
   )
 }
 

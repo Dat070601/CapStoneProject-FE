@@ -54,7 +54,7 @@ const ProductDetailViewModel = () => {
         id: params.id
       }))
       setLoading(false)
-    }, 3000)
+    }, 1000)
   }, [dispatch, params.id])
 
   const increase = () => {
