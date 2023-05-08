@@ -1,4 +1,4 @@
-import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Tfoot, Td } from '@chakra-ui/react'
+import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Tfoot, Td, Textarea, InputGroup, IconButton } from '@chakra-ui/react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { AiOutlineMinus } from 'react-icons/ai'
 import React, { useEffect, useState } from 'react'
@@ -9,6 +9,7 @@ import ProductDetailViewModel from './ProductDetailViewModel'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import './ProductDetail.css'
 import { MdOutlinePayments } from 'react-icons/md'
+import {RxPaperPlane} from 'react-icons/rx'
 import Loading from '../../components/Loading'
 
 const ProductDetail = () => {
@@ -48,13 +49,13 @@ const ProductDetail = () => {
       {!loading ? (<Container maxW={"container.lg"}>
         <Breadcrumb pt="10px">
           <BreadcrumbItem>
-            <Text fontWeight={"semibold"} color={COLOR}>
+            <Text fontWeight={"semibold"}>
               <Link to={"/home"}>Home</Link>
             </Text>
           </BreadcrumbItem>
           <BreadcrumbItem>
               <Link to={"/"}>
-                <Text fontWeight={"semibold"} color={COLOR}>
+                <Text fontWeight={"semibold"}>
                   {book.title}
                 </Text>
               </Link>
@@ -146,14 +147,13 @@ const ProductDetail = () => {
           <Box mt={'10px'}> 
             <TableContainer  border={'1px'} borderRadius={'10px'} borderColor={'gray.100'}>
               <Table variant='striped' colorScheme='teal'>
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
-                <Tbody >
+                <Tbody>
                   <Tr>
                     <Td>Tác giả</Td>
                     <Td>{book.author}</Td>
                   </Tr>
                   <Tr>
-                    <Td>Nhà xuất bảm</Td>
+                    <Td>Nhà xuất bản</Td>
                     <Td>{book.publisher}</Td>
                   </Tr>
                   <Tr>
@@ -165,13 +165,35 @@ const ProductDetail = () => {
                     <Td>{book.numPage}</Td>
                   </Tr>
                   <Tr>
-                    <Td>Tóm tắt</Td>
-                    <Td><Box maxW={'400px'} h={'fit-content'} overflowWrap={'break-word'} flex flexWrap={'wrapcd BookUi'}>{book.description}</Box></Td>
+                    <Td>Tóm tắt ngắn</Td>
+                    <Td whiteSpace={"pre-wrap"}>{book.description}</Td>
                   </Tr>
                 </Tbody>
               </Table>
             </TableContainer>
           </Box>
+        </Box>
+        <Box rounded={"20px"} boxShadow={"xl"} bg="white" mt="20px" padding={"20px"}>
+          {/* Thêm thời gian cmt */}
+          <Text fontSize={'xl'} color={COLOR} as = {'em'}>Bình luận:</Text>
+          <Box mt={'10px'} mb={'10px'}>
+            <HStack>
+              <Input type='input' placeholder='Viết bình luận...'/>
+              <IconButton aria-label='post-coment' background={COLOR} icon={<RxPaperPlane color={'White'}/>} size={'md'}/>
+            </HStack>
+          </Box>
+          {book.reviews?.map( review => {
+            return (
+              <Box mt={'10px'} rounded={"10px"} boxShadow={'xl'} padding={'10px'} bg={'gray.200'}>
+                <Box display={'flex'} gap={'10px'}>
+                  <Text fontWeight={'bold'} textColor={COLOR}>{review.name}</Text> 
+                </Box>
+                <Box mt={'5px'} ml={'20px'}>
+                  <Text>{review.reviewText}</Text>
+                </Box>
+              </Box>
+            )
+          })}
         </Box>
       </Container>) : (
         <Loading />
