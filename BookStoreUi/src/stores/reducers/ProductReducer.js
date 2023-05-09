@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNumberOfPageAsyncThunk, fetchProductAsyncThunk, fetchProductBestSellerAsyncThunk, fetchTopNewProductsAsyncThunk, getProductByIdAsyncThunk } from "../thunks/ProductThunk";
+import { getNumberOfPageAsyncThunk, fetchProductAsyncThunk, fetchProductBestSellerAsyncThunk, fetchTopNewProductsAsyncThunk, getProductByIdAsyncThunk, fetchBookSameCateAsyncThunk } from "../thunks/ProductThunk";
 import { productState } from "../initialState/ProductState";
 
 const productSlice = createSlice({
@@ -21,6 +21,10 @@ const productSlice = createSlice({
     }),
     builder.addCase(fetchTopNewProductsAsyncThunk.fulfilled, (state, action) => {
       state.booksTopNew = action.payload
+    }),
+    builder.addCase(fetchBookSameCateAsyncThunk.fulfilled, (state, action) => {
+      state.books = action.payload
+      console.log(action.payload)
     })
   }
 })

@@ -10,6 +10,7 @@ import { cartSelector } from '../../stores/reducers/CartReducer'
 import { orderSelector } from '../../stores/reducers/OrderReducer'
 import { addOrderAsyncThunk } from '../../stores/thunks/OrderThunk'
 import { updateCartAmmount } from '../../stores/reducers/CartReducer'
+import { fetchBookSameCateAsyncThunk } from '../../stores/thunks/ProductThunk' 
 
 const ProductDetailViewModel = () => {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const ProductDetailViewModel = () => {
 
   const { book } = useSelector(productSelector)
   const { isSuccessInCart, carts, message } = useSelector(cartSelector) 
-
+  const { books} = useSelector(productSelector)
   const [ productPrice, setProductPrice ] = useState()
   const [ productDefaultPrice, setProductDefaultPrice ] = useState()
   const [ productVariantId, setProductVariantId ] = useState()
@@ -57,6 +58,12 @@ const ProductDetailViewModel = () => {
     }, 1000)
   }, [dispatch, params.id])
 
+  useEffect(() => {
+    dispatch(fetchBookSameCateAsyncThunk({
+      bookId: params.id
+    }))
+  },[dispatch, params.id])
+  
   const increase = () => {
     setQuantity(prev => prev + 1)
   }
@@ -141,7 +148,8 @@ const ProductDetailViewModel = () => {
     handleVariantSelected,
     message,
     handleBuyNow,
-    loadingBuyProduct
+    loadingBuyProduct,
+    books
   }
 }
 

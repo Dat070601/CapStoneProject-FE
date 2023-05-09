@@ -11,6 +11,7 @@ import './ProductDetail.css'
 import { MdOutlinePayments } from 'react-icons/md'
 import {RxPaperPlane} from 'react-icons/rx'
 import Loading from '../../components/Loading'
+import Card from '../../components/Home/Card'
 
 const ProductDetail = () => {
   const { 
@@ -33,10 +34,11 @@ const ProductDetail = () => {
     handleVariantSelected,
     message,
     handleBuyNow,
-    loadingBuyProduct
+    loadingBuyProduct,
+    books
   } = ProductDetailViewModel()
 
-  console.log(variantSelected)
+  console.log({ books })
 
   return (
     <Box bg={'gray.100'} minHeight = {"100%"} pb={"100px"}>
@@ -174,6 +176,23 @@ const ProductDetail = () => {
           </Box>
         </Box>
         <Box rounded={"20px"} boxShadow={"xl"} bg="white" mt="20px" padding={"20px"}>
+          <Text fontSize={'xl'} color={COLOR} as = {'em'}>Các sản phẩm cùng thể loại:</Text>
+          <Box display={'flex'} gap={'25px'} justifyContent={'center'} mt={'5px'}>
+            {books?.map(book => {
+              return (
+                <Card 
+                productId={book.id}
+                productName={book.title}  
+                imageUrl = {book.imageUrl} 
+                productPrice = {book.price} 
+                sold = {book.sold}
+                quantities = {book.quantity}
+                />
+              ) 
+            })}
+          </Box>
+        </Box>
+        <Box rounded={"20px"} boxShadow={"xl"} bg="white" mt="20px" padding={"20px"} >
           {/* Thêm thời gian cmt */}
           <Text fontSize={'xl'} color={COLOR} as = {'em'}>Bình luận:</Text>
           <Box mt={'10px'} mb={'10px'}>

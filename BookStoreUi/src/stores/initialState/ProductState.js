@@ -3,5 +3,6 @@ export const productState = {
   book: {},
   booksBestSeller : [],
   booksTopNew : [],
+  booksSameCate : [],
   page : 0
 }

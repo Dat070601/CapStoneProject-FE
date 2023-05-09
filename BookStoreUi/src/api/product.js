@@ -44,4 +44,13 @@ const fetchTopNewProductsAsync = async (url) => {
     console.log(error)
   }
 }
-export { fetchProductAsync, getProductById, fetchMostProductBestSellerAsync, fetchTopNewProductsAsync, getNumberOfPage }
+
+const fetchBookSameCate = async (url, bookId) => {
+  try {
+    const response = await axios.get(`${url}/api/book/book-same-cate/${bookId}`)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+export { fetchProductAsync, getProductById, fetchMostProductBestSellerAsync, fetchTopNewProductsAsync, getNumberOfPage, fetchBookSameCate }
