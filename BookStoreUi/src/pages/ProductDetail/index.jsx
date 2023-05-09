@@ -16,8 +16,6 @@ import Card from '../../components/Home/Card'
 const ProductDetail = () => {
   const { 
     book,
-    productPrice,
-    productDefaultPrice,
     quantity,
     loading,
     productVariantId,

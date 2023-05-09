@@ -7,7 +7,6 @@ import { addProductToCartAsyncThunk } from '../../stores/thunks/CartThunk'
 import { getProductByIdAsyncThunk } from '../../stores/thunks/ProductThunk'
 import { useToast } from '@chakra-ui/react'
 import { cartSelector } from '../../stores/reducers/CartReducer'
-import { orderSelector } from '../../stores/reducers/OrderReducer'
 import { addOrderAsyncThunk } from '../../stores/thunks/OrderThunk'
 import { updateCartAmmount } from '../../stores/reducers/CartReducer'
 import { fetchBookSameCateAsyncThunk } from '../../stores/thunks/ProductThunk' 
@@ -22,7 +21,6 @@ const ProductDetailViewModel = () => {
   const { book } = useSelector(productSelector)
   const { isSuccessInCart, carts, message } = useSelector(cartSelector) 
   const { books} = useSelector(productSelector)
-  const [ productPrice, setProductPrice ] = useState()
   const [ productDefaultPrice, setProductDefaultPrice ] = useState()
   const [ productVariantId, setProductVariantId ] = useState()
   const [ quantity, setQuantity ] = useState(1)
@@ -41,8 +39,6 @@ const ProductDetailViewModel = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setProductPrice(book.productVariants[0]?.productSalePrice)
-      setProductDefaultPrice(book.productVariants[0]?.productDefaultPrice)
       setVariantSelected(book.productVariants[0]?.productVariantName)
       setExistQuantity(book.productVariants[0].quantity)
       setProductVariantId(book.productVariants[0]?.productVariantId)
@@ -73,12 +69,8 @@ const ProductDetailViewModel = () => {
   }
 
   const handleSelectVariant = ({
-    salePrice,
-    defaultPrice,
     existQuantity
   }) => {
-    setProductPrice(salePrice)
-    setProductDefaultPrice(defaultPrice)
     setExistQuantity(existQuantity)
   }
 
@@ -130,8 +122,6 @@ const ProductDetailViewModel = () => {
 
   return {
     book,
-    productPrice,
-    productDefaultPrice,
     quantity,
     loading,
     productVariantId,
