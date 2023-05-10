@@ -24,7 +24,6 @@ const productSlice = createSlice({
     }),
     builder.addCase(fetchBookSameCateAsyncThunk.fulfilled, (state, action) => {
       state.books = action.payload
-      console.log(action.payload)
     })
   }
 })

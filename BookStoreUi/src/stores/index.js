@@ -6,6 +6,7 @@ import ProductReducer  from './reducers/ProductReducer';
 import { orderReducer } from './reducers/OrderReducer';
 import { paymentReducer } from './reducers/PaymentReducer';
 import { searchReducer } from './reducers/SearchReducer';
+import CategoryReducer  from './reducers/CategoryReducer';
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
 		orderReducer,
 		paymentReducer,
 		searchReducer,
+		CategoryReducer,
     // productMostSellerReducer,
     // productTopNewReducer
 	}

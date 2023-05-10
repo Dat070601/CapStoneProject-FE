@@ -23,7 +23,7 @@ const Card = ({ imageUrl, productName, productPrice, productId, sold, quantities
             transition: "0.2s",
             bg : "gray.100",
             border: "1px solid gray"
-            }} width={'210px'} height={'320px'} bg={'white'}>
+            }} width={'210px'} height={'320px'} bg={'white'} boxShadow={"xl"}>
                 <Box width='200px' display={'flex'} justifyContent={'center'} mt={"5px"}>
                     <Image src={imageUrl} height='215px' width='185px' />
                 </Box>

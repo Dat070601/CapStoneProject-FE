@@ -4,14 +4,13 @@ import { useParams } from 'react-router-dom';
 // import { getNumberOfPageSelector, productMostSellerSelector, productSelector, productTopNewSelector } from '../../stores/reducers/ProductReducer';
 import { getNumberOfPageAsyncThunk,fetchProductAsyncThunk, fetchProductBestSellerAsyncThunk, fetchTopNewProductsAsyncThunk } from '../../stores/thunks/ProductThunk';
 import { productSelector } from '../../stores/reducers/ProductReducer';
+import { categorySelector } from '../../stores/reducers/CategoryReducer';
+import { fetchCategoryAsyncThunk } from '../../stores/thunks/CategoryThunk';
 
 const HomeViewModel = () => {
 	const dispatch = useDispatch()
 	const { books, booksBestSeller, booksTopNew, page } = useSelector(productSelector)
-	// const { booksBestSeller } = useSelector(productMostSellerSelector)
-	// const { booksTopNew } = useSelector(productTopNewSelector)
-	// const { page }  = useSelector(getNumberOfPageSelector)
-	console.log(page)
+	const { cates } = useSelector(categorySelector)
 	const params = useParams()
 
 	useEffect(() => {
@@ -19,6 +18,7 @@ const HomeViewModel = () => {
 		dispatch(fetchProductBestSellerAsyncThunk(null))
 		dispatch(fetchTopNewProductsAsyncThunk(null))
 		dispatch(getNumberOfPageAsyncThunk(null))
+		dispatch(fetchCategoryAsyncThunk(null))
 	}, [dispatch])
 
 	useEffect(() => {	
@@ -32,6 +32,7 @@ const HomeViewModel = () => {
 		booksBestSeller,
 		booksTopNew,
 		page,
+		cates
 	}
 };
 

@@ -9,12 +9,14 @@ import { COLOR } from '../../constant';
 import { BiCheckDouble, BiCartAdd } from "react-icons/bi";
 import { TbCoin } from "react-icons/tb"
 import PaginatedItems from '../../components/Pagination/Pagination';
+import ListCategory from '../../components/ListCategory/ListCategory';
 
 
 const Home = () => {
 	const { books } = HomeViewModel()
 	const { booksBestSeller } = HomeViewModel()
 	const { booksTopNew} = HomeViewModel()
+	const { cates } = HomeViewModel()
 	return (
 		<Box bg={'gray.100'} minHeight = {"280vh"} pb={"100px"}>
 			<Box>
@@ -69,12 +71,12 @@ const Home = () => {
 			<Box>
 				<Image src='https://res.cloudinary.com/duu07kasy/image/upload/v1679561195/Our_system_provide_cdd6uw.png' w={'100%'}/>
 			</Box>
-			<Container
-				mt={"50px"}
-				maxW={"container.xl"}
-			>
-			<PaginatedItems/>
-			</Container>
+			<Box display={"flex"}>				
+				<ListCategory mainCategories={cates}/>
+				<Container mt={"50px"} maxW={"container.xl"}>
+				<PaginatedItems/>
+				</Container>
+			</Box>
     	</Box>
 	);
 };

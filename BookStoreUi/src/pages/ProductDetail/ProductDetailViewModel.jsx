@@ -35,7 +35,7 @@ const ProductDetailViewModel = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  }, [loading])
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,6 +52,10 @@ const ProductDetailViewModel = () => {
       }))
       setLoading(false)
     }, 1000)
+
+    return () => {
+      setLoading(true)
+    }
   }, [dispatch, params.id])
 
   useEffect(() => {
