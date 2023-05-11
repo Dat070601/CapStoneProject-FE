@@ -1,20 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { categpryState } from "../initialState/CategoryState";
-import { fetchCategoryAsyncThunk } from "../thunks/CategoryThunk";
+import { fetchCategoryAsyncThunk, fetchGetBookByCategoryAsyncThunk } from "../thunks/CategoryThunk";
 
 const categorySlice = createSlice({
     name : 'category',
     initialState : categpryState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchCategoryAsyncThunk.fulfilled, (state,action) => {
+        builder.addCase(fetchCategoryAsyncThunk.fulfilled, (state, action) => {
             state.cates = action.payload
-            console.log(state.cates)
+        })
+
+        builder.addCase(fetchGetBookByCategoryAsyncThunk.pending, () => {
+            console.log("getting books...")
+        })
+
+        builder.addCase(fetchGetBookByCategoryAsyncThunk.fulfilled, (state, action) => {
+            state.cate = action.payload
         })
     }
 })
 
-export default categorySlice.reducer
-const categorySelector = (state) => state.CategoryReducer
+const categoryReducer = categorySlice.reducer
+const categorySelector = (state) => state.categoryReducer
 
-export {categorySelector}
+export { categorySelector , categoryReducer }

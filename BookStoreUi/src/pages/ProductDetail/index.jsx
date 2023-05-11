@@ -18,30 +18,22 @@ const ProductDetail = () => {
     book,
     quantity,
     loading,
-    productVariantId,
-    accessTokenSaved,
-    variantSelected,
     visible,
-    existQuantity,
     isSuccessInCart,
     increase,
+    accessTokenSaved,
     decrease,
-    handleSelectVariant,
     addProductToCart,
-    getVariantId,
-    handleVariantSelected,
     message,
     handleBuyNow,
     loadingBuyProduct,
     books
   } = ProductDetailViewModel()
 
-  console.log({ books })
-
   return (
     <Box bg={'gray.100'} minHeight = {"100%"} pb={"100px"}>
       { visible ? (
-        <Alert status={isSuccessInCart == true ? 'success' : 'error'}>
+        <Alert status={isSuccessInCart == true ? 'success' : 'error'} position={'absolute'} w={"400px"} ml={"5px"}>
           <AlertIcon />
           <AlertTitle>{isSuccessInCart == true ? "Success!" : "Sorry!"}</AlertTitle>
           <AlertDescription>{message}</AlertDescription>
@@ -109,35 +101,35 @@ const ProductDetail = () => {
                 bg={COLOR} 
                 color="white" 
                 width={"100%"} 
-                isDisabled={accessTokenSaved && variantSelected ? false : true}
+                isDisabled={accessTokenSaved ? false : true}
                 leftIcon={<AiOutlineShoppingCart />}
                 onClick={() => {
                   addProductToCart({
-                    productVariantId,
+                    bookId : book.id,
                     quantity
                   })
                 }}
               >
-                Add to cart
+                Thêm vào giỏ hàng
               </Button>
               <Button 
                 loadingText={"Buy now..."}
                 isLoading={loadingBuyProduct}
-                isDisabled={accessTokenSaved && variantSelected && quantity > 0 ? false : true}
+                isDisabled={accessTokenSaved && quantity > 0 ? false : true}
                 color={COLOR} 
                 width={"100%"} 
                 variant="outline" 
                 leftIcon={<MdOutlinePayments />}
                 onClick={() => {
                   handleBuyNow({
-                    details: [...[], {
-                      productVariantId,
+                    orderDetails: [...[], {
+                      bookId : book.id,
                       quantity
                     }]
                   })
                 }}
               >
-                Buy now
+                Mua Ngay
               </Button>
             </VStack>
           </Box>

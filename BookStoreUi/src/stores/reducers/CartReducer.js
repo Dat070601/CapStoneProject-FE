@@ -27,8 +27,8 @@ const cartSlice = createSlice({
 				state.carts = []
 				state.cartAmmount = 0
 			} else {
-				state.carts = action.payload
-				state.cartAmmount = action.payload?.reduce((prev, current) => prev + current.quantity, 0)
+				state.carts = action.payload.cartDetailViewModels
+				state.cartAmmount = action.payload?.cartDetailViewModels.reduce((prev, current) => prev + current.quantity, 0)
 			}
 		});
 

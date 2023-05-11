@@ -1,10 +1,11 @@
-import { Icon, Container, Text, Heading, HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, Checkbox, Flex, Box, Textarea, Spacer } from '@chakra-ui/react';
+import { Icon, Container, Text, Heading, HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, Checkbox, Flex, Box, Textarea, Spacer, InputGroup, Select } from '@chakra-ui/react';
 import React from 'react';
 import { COLOR } from '../../constant';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import CartViewModel from './CartViewModel';
 import { BsPaypal } from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom';
+import { fetchGetProvince } from '../../api/address';
 
 const Cart = () => {
 	const { 
@@ -34,6 +35,12 @@ const Cart = () => {
 
 	return (
 		<Box margin="20px 0px 0px 0px" position={"relative"} height="87vh">
+			<Select placeholder='Select option'>
+				{() => fetchGetProvince}
+				<option value='option1'>Option 1</option>
+				<option value='option2'>Option 2</option>
+				<option value='option3'>Option 3</option>
+			</Select>
 			<Flex justifyContent={"center"} gap={"100px"} flexWrap={"wrap"}>
 				<TableContainer mt="20px" w={"50%"}>
 					<Table variant={'simple'}>
@@ -43,13 +50,12 @@ const Cart = () => {
 									<Button 
 										color={"white"} 
 										onClick={handleToggleDeleteButton}
-										bg={COLOR}>Modify
+										bg={COLOR}>Chỉnh sửa
 									</Button>
 								</Th>
-								<Th>Product name</Th>
-								<Th>Item</Th>
-								<Th>Quantity</Th>
-								<Th>Total</Th>
+								<Th>Tên sản phẩm</Th>
+								<Th>Số lượng</Th>
+								<Th>Giá Tiền</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -59,24 +65,18 @@ const Cart = () => {
 										<Td>
 											<Checkbox
 												onChange={(event) => !toggleDeleteButton ? selectProductAddToOrder({
-													id: cart.productVariantId,
-													title: cart.productName,
-													variant: cart.productVariantName,
+													id: cart.bookId,
+													title: cart.bookName,
 													quantity: cart.quantity,
-													total: cart.total
+													total: cart.price
 												}, event) : selectProductToDelete({
-													productVariantId: cart.productVariantId
+													bookId: cart.bookId
 												}, event)}
 											></Checkbox>
 										</Td>
 										<Td>
 											<HStack>
-												<Text color={COLOR} fontWeight={'medium'}>{cart.productName}</Text>
-											</HStack>
-										</Td>
-										<Td>
-											<HStack>
-												<Text color={COLOR} fontWeight={'medium'}>{cart.productVariantName}</Text>
+												<Text color={COLOR} fontWeight={'medium'}>{cart.bookName}</Text>
 											</HStack>
 										</Td>
 										<Td>
@@ -91,7 +91,7 @@ const Cart = () => {
 													value={cart.quantity}
 													// defaultValue={cart.quantity}
 													type={'number'} 
-													width={'19%'} 
+													width={'25%'} 
 												/>
 												<Button 
 													size={'sm'}
@@ -101,19 +101,7 @@ const Cart = () => {
 												</Button>
 											</HStack>
 										</Td>
-										<Td>{cart.total} $</Td>
-										{/* <Td>
-											{ toggleDeleteButton == true ? <Button
-												loadingText={"Delete..."}
-												onClick={() => {
-													deleteProductInCart({
-														productVariantId: cart.productVariantId
-													})
-												}}
-											 	colorScheme={"red"}
-											>Delete
-											</Button> : <></>}
-										</Td> */}
+										<Td>{cart.price} đ</Td>
 									</Tr>
 								);
 							})}
@@ -121,18 +109,18 @@ const Cart = () => {
 					</Table>
 				</TableContainer>
 				<Box padding={"20px"} bg={'hwb(180 82% 0%)'} w="400px" mt="20px" position={"relative"}>
-					<Text fontSize={"20px"} color={COLOR} fontWeight={"semibold"}>Preview your order</Text>
+					<Text fontSize={"20px"} color={COLOR} fontWeight={"semibold"}>Chuẩn bị đơn hàng</Text>
 					{prepareOrderProduct.map(product => {
 						return (
 							<Box mt="5px" padding={"20px"} border={"white 1px solid"}>
 								<Text fontWeight={"medium"} color={COLOR}>{product.title}</Text>
 								<Text fontWeight={"light"} color={COLOR}>{product.variant}</Text>
 								<Text fontWeight={"light"} color={COLOR}>Quantity: {product.quantity}</Text>
-								<Text mt="10px" fontWeight={"medium"}>{product.total} $</Text>
+								<Text mt="10px" fontWeight={"medium"}>{product.total} đ</Text>
 							</Box>
 						)
 					})}
-					<Text color={COLOR} fontWeight={"bold"} mt="10px">Total: {total} $</Text>
+					<Text color={COLOR} fontWeight={"bold"} mt="10px">Total: {total} đ</Text>
 					<Box mt="10px">
 						<Textarea onChange={inputHandle} placeholder='message...' bg={"white"}/>
 					</Box>
@@ -144,12 +132,12 @@ const Cart = () => {
 						width={"100%"}
 						onClick={() => {
 							createOrderAsync({
-								details: prepareToAddOrderProducts
+								orderDetails: prepareToAddOrderProducts
 							})
 						}}
-						>Create order</Button>
+						>Tạo đơn hàng</Button>
 						<Text color={COLOR} >
-							<Link to="/order">View Order</Link>
+							<Link to="/order">Xem đơn hàng</Link>
 						</Text>
 				</Box>
 			</Flex>

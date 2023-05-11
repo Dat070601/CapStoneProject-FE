@@ -46,20 +46,20 @@ const CartViewModel = () => {
 		if (event.target.checked === true)
 		{
 			setPrepareOrderProduct([...prepareOrderProduct, { id, title, variant, quantity, total }])
-			setPrepareToAddOrderProduct([...prepareToAddOrderProducts, { productVariantId: id, quantity }])
+			setPrepareToAddOrderProduct([...prepareToAddOrderProducts, { bookId: id, quantity }])
 		} 
 		else
 		{
 			setPrepareOrderProduct(prepareOrderProduct.filter(product => product.id !== id))
-			setPrepareToAddOrderProduct(prepareToAddOrderProducts.filter(product => product.productVariantId !== id))
+			setPrepareToAddOrderProduct(prepareToAddOrderProducts.filter(product => product.bookId!== id))
 		}
 	};
 
-	const selectProductToDelete = ({ productVariantId }, event) => {
+	const selectProductToDelete = ({ bookId }, event) => {
 		if (event.target.checked === true) {
-			setPrepareToDeleteProducts([...prepareToDeleteProducts, { productVariantId }])
+			setPrepareToDeleteProducts([...prepareToDeleteProducts, { bookId }])
 		} else {
-			setPrepareToDeleteProducts(prepareToDeleteProducts.filter(product => product.productVariantId !== productVariantId))
+			setPrepareToDeleteProducts(prepareToDeleteProducts.filter(product => product.bookId!== productVariantId))
 		}
 	}
 
@@ -125,15 +125,17 @@ const CartViewModel = () => {
 	}, [quantity]);
 
 	const createOrderAsync = ({
-		details,
+		orderDetails,
 	}) => {
 		dispatch(addOrderAsyncThunk({
 			token: accessTokenSaved,
 			data: {
-				transferAddress: "Base on paypal",
-				paymentMethodId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-				message,
-				details
+				"paymentId": "9b9dad96-726f-4195-aacb-d952f61fca31",
+				"phoneNumber": "0775587882",
+				"address": "k47/17 Trần Xuân Lê",
+				"city": "Đà Nẵng",
+				"district": "Thanh Khê",
+				orderDetails
 			}
 		}))
 		setTimeout(() => {

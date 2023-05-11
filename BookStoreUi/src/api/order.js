@@ -27,7 +27,7 @@ const getOrderAsyncById = async (url, { id }) => {
 
 const getOrderByCustomerIdAsync = async (url, token) => {
   try {
-    const response = await axios.get(`${url}/order-from-customer`, {
+    const response = await axios.get(`${url}/api/order/order-from-customer`, {
       headers: {
         Authorization: `bearer ${token}`
       }

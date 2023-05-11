@@ -11,16 +11,16 @@ const PaymentResult = () => {
   const { loading } = PaymentResultViewModel()
 
   return (
-    <>
-    {!loading ? <Fade in={!loading}><VStack mt="100px">
-      <Icon as={BsCheckCircle} width="300px" height={"50px"} color={COLOR} />
-      <Text fontSize={"40px"} fontWeight={"light"} color="gray.700">Payment Successfully</Text>
-      <Text>Thank you for shopping with us</Text>
-      <Box>
-        <Link to="/home" style={{ color: COLOR }}>Continue to buy</Link>
-      </Box>
-    </VStack></Fade>: <Loading />}
-    </>
+    <Box mt={"100px"} h={"50vh"}>
+      {!loading ? <Fade in={!loading}><VStack>
+        <Icon as={BsCheckCircle} width="300px" height={"50px"} color={COLOR} />
+        <Text fontSize={"40px"} fontWeight={"light"} color="gray.700">Payment Successfully</Text>
+        <Text>Thank you for shopping with us</Text>
+        <Box>
+          <Link to="/home" style={{ color: COLOR }}>Continue to buy</Link>
+        </Box>
+      </VStack></Fade>: <Loading />}
+    </Box>
   )
 }
 

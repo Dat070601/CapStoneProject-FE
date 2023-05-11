@@ -1,3 +1,4 @@
 export const categpryState = {
-    cates : []
+    cates : [],
+    cate: {}
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fetchCustomerProfileAsync = async (url, { token }) => {
 	try {
-		const response = await axios.get(`${url}/get-customer`, {
+		const response = await axios.get(`${url}/api/user/get-customer`, {
 			headers: {
 				'Authorization': `Bearer ${token}`
 			}

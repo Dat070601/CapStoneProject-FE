@@ -8,13 +8,17 @@ function Category({category}) {
     return (
       <>
         <Box display="flex" fontWeight={"semibold"} mt={'10px'}>
-          {category.nameCategory}
+          <Text _hover={{color : "red"}}>
+            <Link key={category.categoryId} to={`/category/${category.categoryId}`}> {category.nameCategory}</Link>
+          </Text>
         </Box>
         {hasSubcategories && (
           <>
             {category.categories.map((subcategory) => (
               <Box ml={"10px"}>
-                <Link key={subcategory.categoryId} ml={"10px"}>{subcategory.nameCategory}</Link>
+                <Text _hover={{color : "red"}}>
+                  <Link key={subcategory.categoryId} ml={"10px"} to={`/category/${subcategory.categoryId}`}>{subcategory.nameCategory}</Link>
+                </Text>
               </Box>
             ))}
           </>

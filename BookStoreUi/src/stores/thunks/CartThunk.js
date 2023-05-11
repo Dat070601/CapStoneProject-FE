@@ -7,9 +7,6 @@ const fetchCartAsyncThunk = createAsyncThunk('cart/fetch-cart', async (payload) 
 		const response = await fetchCartAsync(
 			URL, 
 			payload.token,
-			{
-				userId: payload.userId
-			}
 		);
 		return response;
 	} catch (error) {
@@ -19,12 +16,12 @@ const fetchCartAsyncThunk = createAsyncThunk('cart/fetch-cart', async (payload) 
 
 const addProductToCartAsyncThunk = createAsyncThunk("cart/add-product-to-cart", async (payload) => {
 	try {
-		const { token, productVariantId, quantity } = payload
+		const { token, bookId, quantity } = payload
 		const response = await addProductToCartAsync(
 			URL,
 			token,
 			{
-				productVariantId,
+				bookId,
 				quantity	
 			}
 		)

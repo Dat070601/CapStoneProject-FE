@@ -8,5 +8,12 @@ const fetchGetParentCategoryAsync = async (url) => {
         console.log(error)
       }
 }
-
-export {fetchGetParentCategoryAsync}
+const fetchGetBookByCateAsync = async (url, categoryId) => {
+    try {
+      const response = await axios.get(`${url}/api/category/${categoryId}`)
+      return response.data
+    } catch (error) {
+      console.log(error);
+    }
+}
+export {fetchGetParentCategoryAsync, fetchGetBookByCateAsync}

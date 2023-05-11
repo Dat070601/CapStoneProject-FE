@@ -7,10 +7,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  background-color: #EDF2F7;
 }
 
 body {
-  background-color: hwb(180 76% 0%);
+  background-color:hwb(180 76% 0%);
 }
 .pagination {
   display: flex;

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchGetParentCategoryAsync } from "../../api/category";
+import { fetchGetParentCategoryAsync, fetchGetBookByCateAsync } from "../../api/category";
 import { URL } from "../../constant";
 
 const fetchCategoryAsyncThunk = createAsyncThunk("category/fetch-category", async (payload) => {
@@ -11,4 +11,14 @@ const fetchCategoryAsyncThunk = createAsyncThunk("category/fetch-category", asyn
     }
 })
 
-export {fetchCategoryAsyncThunk}
+const fetchGetBookByCategoryAsyncThunk = createAsyncThunk("category/fetch-get-book", async (payload) => {
+    try {
+        const { categoryId } = payload
+        const response = await fetchGetBookByCateAsync(URL, categoryId)
+        console.log({ response })
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}) 
+export {fetchCategoryAsyncThunk, fetchGetBookByCategoryAsyncThunk}

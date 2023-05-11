@@ -16,7 +16,7 @@ const LoginPage = () => {
 
 	return (
 		<Container maxW={'container.sm'}>
-			<Box bg = "gray.100" padding={[10, 10]} rounded="10px">
+			<Box bg = "gray.200" padding={[10, 10]} rounded="10px">
 				<Heading color={COLOR}>Login</Heading>
 				<Box mt={'20px'}> 
 					<form onSubmit={formik.handleSubmit}>

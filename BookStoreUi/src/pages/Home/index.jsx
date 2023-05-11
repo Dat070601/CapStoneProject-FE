@@ -18,7 +18,7 @@ const Home = () => {
 	const { booksTopNew} = HomeViewModel()
 	const { cates } = HomeViewModel()
 	return (
-		<Box bg={'gray.100'} minHeight = {"280vh"} pb={"100px"}>
+		<Box bg={'gray.200'} minHeight = {"280vh"} pb={"100px"}>
 			<Box>
 				<Image src='https://res.cloudinary.com/duu07kasy/image/upload/v1679903519/Hi_Webcome_to_BookFast_1_lksdgc.png' w={'100%'}/>
 			</Box>
@@ -71,8 +71,10 @@ const Home = () => {
 			<Box>
 				<Image src='https://res.cloudinary.com/duu07kasy/image/upload/v1679561195/Our_system_provide_cdd6uw.png' w={'100%'}/>
 			</Box>
-			<Box display={"flex"}>				
-				<ListCategory mainCategories={cates}/>
+			<Box display={"flex"}>
+				<Box ml={"10px"}>
+					<ListCategory mainCategories={cates}/>
+				</Box>				
 				<Container mt={"50px"} maxW={"container.xl"}>
 				<PaginatedItems/>
 				</Container>

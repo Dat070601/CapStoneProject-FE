@@ -26,7 +26,6 @@ const ProductDetailViewModel = () => {
   const [ quantity, setQuantity ] = useState(1)
   const [ loading, setLoading ] = useState(true)
   const [ loadingBuyProduct, setLoadingBuyProduct ] = useState(false)
-  const [ variantSelected, setVariantSelected ] = useState()
   const [ visible, setVisible ] = useState(false)
   const [ existQuantity, setExistQuantity ] = useState()
   const accessTokenSaved = get({
@@ -89,10 +88,10 @@ const ProductDetailViewModel = () => {
     }
   }, [quantity])
 
-  const addProductToCart = ({ productVariantId, quantity }) => {
+  const addProductToCart = ({ bookId, quantity }) => {
     dispatch(addProductToCartAsyncThunk({
       token: accessTokenSaved,
-      productVariantId,
+      bookId,
       quantity
     }))
     dispatch(updateCartAmmount({
@@ -101,17 +100,20 @@ const ProductDetailViewModel = () => {
     setVisible(true)
     setTimeout(() => {
       setVisible(false)
-    }, 2000)
+    }, 5000)
   }
 
-  const handleBuyNow = ({ details }) => {
+  const handleBuyNow = ({ orderDetails }) => {
     setLoadingBuyProduct(true)
     dispatch(addOrderAsyncThunk({
       token: accessTokenSaved,
       data: {
-        transferAddress: "Base on paypal",
-        paymentMethodId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        details
+        "paymentId": "9b9dad96-726f-4195-aacb-d952f61fca31",
+        "phoneNumber": "0775587882",
+        "address": "k47/17 Trần Xuân Lê",
+        "city": "Đà Nẵng",
+        "district": "Thanh Khê",
+        orderDetails
       }
     }))
     setTimeout(() => {
@@ -130,7 +132,6 @@ const ProductDetailViewModel = () => {
     loading,
     productVariantId,
     accessTokenSaved,
-    variantSelected,
     visible,
     existQuantity,
     isSuccessInCart,

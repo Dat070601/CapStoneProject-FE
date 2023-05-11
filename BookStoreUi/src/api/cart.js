@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const fetchCartAsync = async (url, token, { userId }) => {
+const fetchCartAsync = async (url, token) => {
 	try {
-		const response = await axios.get(`${url}/api/cart/${userId}`, {
+		const response = await axios.get(`${url}/api/cart`, {
 			headers: {
 				Authorization: `bearer ${token}`
 			}
@@ -13,7 +13,7 @@ const fetchCartAsync = async (url, token, { userId }) => {
 	}
 }
 
-const addProductToCartAsync = async (url, token, { productVariantId, quantity }) => {
+const addProductToCartAsync = async (url, token, { bookId, quantity }) => {
 	try {
 		const response = await axios({
 			url: `${url}/api/cart`,
@@ -21,7 +21,7 @@ const addProductToCartAsync = async (url, token, { productVariantId, quantity })
 				"Authorization": `bearer ${token}`
 			},
 			data: {
-				productVariantId,
+				bookId,
 				quantity
 			},
 			method: "POST"
