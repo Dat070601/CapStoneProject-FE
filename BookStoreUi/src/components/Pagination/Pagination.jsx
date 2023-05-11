@@ -17,7 +17,7 @@ const Pagination = () => {
   } 
   fetchTotalNumberOfPages()
   useEffect(() => {
-    
+    window.scrollTo(0, 1300)
     fetchData()
   }, [currentPage]);
 

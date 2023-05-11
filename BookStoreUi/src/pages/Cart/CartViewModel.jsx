@@ -125,16 +125,18 @@ const CartViewModel = () => {
 	}, [quantity]);
 
 	const createOrderAsync = ({
+		values,
 		orderDetails,
 	}) => {
 		dispatch(addOrderAsyncThunk({
 			token: accessTokenSaved,
 			data: {
 				"paymentId": "9b9dad96-726f-4195-aacb-d952f61fca31",
-				"phoneNumber": "0775587882",
-				"address": "k47/17 Trần Xuân Lê",
-				"city": "Đà Nẵng",
-				"district": "Thanh Khê",
+				"phoneNumber": values.phoneNumber,
+				"address": values.address,
+				"city": values.city,
+				"district": values.district,
+				"message": values.message,
 				orderDetails
 			}
 		}))

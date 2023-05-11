@@ -27,7 +27,9 @@ const Order = () => {
             })) : <Text padding={"20px"} fontWeight="light" fontSize={"20px"}>None order to pay</Text>}
           </Box> 
           <Box boxShadow={"xl"} bg="white" mt="20px" padding={["20px", "20px"]}>
-            <Text>Tổng hóa đơn: <Text fontWeight={"semibold"}>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(order?.totalPrice)}</Text></Text>
+            <Text mt="10px">Địa chỉ giao hàng: {order?.address}, quận {order?.district}, thành phố {order?.city}</Text>
+            <Text mt="10px">Lời nhắn: {order?.messageOrder}</Text>
+            <Text mt="10px">Tổng hóa đơn: <Text fontWeight={"semibold"}>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(order?.totalPrice)}</Text></Text>
           </Box>
           <Button 
             bg={COLOR} 

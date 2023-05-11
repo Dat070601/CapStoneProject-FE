@@ -27,7 +27,7 @@ const Home = () => {
 					<Text fontSize="3xl" fontWeight={"bold"} color={'red'}> Top 5 best seller </Text>
 					<Icon as={TbCoin} color={"orange.400"} w={"40px"} h={"50px"}/>
 				</Box>
-				<Box mb="50px" display={"flex"} flexWrap="wrap" gap={"25px"} mt = "20px">
+				<Box mb="50px" display={"flex"} flexWrap="wrap" gap={"25px"} mt = "20px" justifyContent={'center'} alignItems={'center'}>
 				{booksBestSeller?.map(book => {
 				return(
 				<Card 
@@ -53,7 +53,7 @@ const Home = () => {
 					<Text fontSize="3xl" fontWeight={"bold"} color={COLOR} > New Books</Text>
 					<Icon as={BiCheckDouble} color={"green"} w={"50px"} h={"46px"}/>					
 				</Box>
-				<Box mb="50px" display={"flex"} flexWrap="wrap" gap={"25px"} mt = "20px">
+				<Box mb="50px" display={"flex"} flexWrap="wrap" gap={"25px"} mt = "20px" justifyContent={'center'} alignItems={'center'}>
 				{booksTopNew?.map(book => {
 				return(
 				<Card 
@@ -75,7 +75,7 @@ const Home = () => {
 				<Box ml={"10px"}>
 					<ListCategory mainCategories={cates}/>
 				</Box>				
-				<Container mt={"50px"} maxW={"container.xl"}>
+				<Container mt={"20px"} maxW={"container.xl"}>
 				<PaginatedItems/>
 				</Container>
 			</Box>
