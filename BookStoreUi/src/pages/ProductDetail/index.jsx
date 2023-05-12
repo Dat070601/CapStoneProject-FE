@@ -1,4 +1,4 @@
-import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Tfoot, Td, Textarea, InputGroup, IconButton } from '@chakra-ui/react'
+import { Input, Button, Icon, Box, Breadcrumb, BreadcrumbItem, Text, Container, Flex, Image, Divider, HStack, Spinner, VStack, Alert, AlertIcon, AlertTitle, FormHelperText,AlertDescription, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Tfoot, Td, Textarea, InputGroup, IconButton, useDisclosure } from '@chakra-ui/react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { AiOutlineMinus } from 'react-icons/ai'
 import React, { useEffect, useState } from 'react'
@@ -12,9 +12,13 @@ import { MdOutlinePayments } from 'react-icons/md'
 import {RxPaperPlane} from 'react-icons/rx'
 import Loading from '../../components/Loading'
 import Card from '../../components/Home/Card'
+import TypeAddressModal from '../../components/TypeAddressModal'
+import { useFormik } from 'formik'
+import { getProductByIdAsyncThunk } from '../../stores/thunks/ProductThunk'
 
 const ProductDetail = () => {
   const { 
+    formik,
     book,
     quantity,
     loading,
@@ -25,10 +29,27 @@ const ProductDetail = () => {
     decrease,
     addProductToCart,
     message,
-    handleBuyNow,
+    createReviewAsync,
     loadingBuyProduct,
-    books
+    books,
+    dispatch
   } = ProductDetailViewModel()
+
+  const { onOpen, isOpen, onClose } = useDisclosure()
+
+  const reviewForm = useFormik({
+    initialValues: {
+      reviewText: ''
+    },
+    
+    onSubmit: (values, { resetForm }) => {
+      createReviewAsync({values})
+      dispatch(getProductByIdAsyncThunk({
+        id: book.id
+      }))
+      resetForm()
+    }
+  })
 
   return (
     <Box bg={'gray.100'} minHeight = {"100%"} pb={"100px"}>
@@ -121,12 +142,7 @@ const ProductDetail = () => {
                 variant="outline" 
                 leftIcon={<MdOutlinePayments />}
                 onClick={() => {
-                  handleBuyNow({
-                    orderDetails: [...[], {
-                      bookId : book.id,
-                      quantity
-                    }]
-                  })
+                  onOpen()
                 }}
               >
                 Mua Ngay
@@ -165,8 +181,8 @@ const ProductDetail = () => {
             </TableContainer>
           </Box>
         </Box>
-        <Box rounded={"20px"} boxShadow={"xl"} bg="white" mt="20px" padding={"20px"}>
-          <Text fontSize={'xl'} color={COLOR} as = {'em'}>Các sản phẩm cùng thể loại:</Text>
+        <Box rounded={"20px"} boxShadow={"xl"} bg="blackAlpha.100" mt="20px" padding={"20px"}>
+          <Text fontSize={'xl'} as = {'em'}>Các sản phẩm cùng thể loại:</Text>
           <Box display={'flex'} gap={'25px'} justifyContent={'center'} mt={'5px'}>
             {books?.map(book => {
               return (
@@ -186,10 +202,14 @@ const ProductDetail = () => {
           {/* Thêm thời gian cmt */}
           <Text fontSize={'xl'} color={COLOR} as = {'em'}>Bình luận:</Text>
           <Box mt={'10px'} mb={'10px'}>
+            <form onSubmit = {reviewForm.handleSubmit}>
             <HStack>
-              <Input type='input' placeholder='Viết bình luận...'/>
-              <IconButton aria-label='post-coment' background={COLOR} icon={<RxPaperPlane color={'White'}/>} size={'md'}/>
+              <Input id="reviewText" name="reviewText" value={reviewForm.values.reviewText} onChange={reviewForm.handleChange} type='input' placeholder='Viết bình luận...'/>
+              <Box w={"100px"}>
+                <IconButton type='submit' aria-label='post-coment' background={COLOR} icon={<RxPaperPlane color={'White'}/>} isDisabled={accessTokenSaved ? false : true}/>
+              </Box>
             </HStack>
+            </form>
           </Box>
           {book.reviews?.map( review => {
             return (
@@ -207,6 +227,12 @@ const ProductDetail = () => {
       </Container>) : (
         <Loading />
       )}
+      <TypeAddressModal 
+        formik={formik}
+        isOpen={isOpen} 
+        onClose={onClose} 
+        
+      />
     </Box>
   )
 }

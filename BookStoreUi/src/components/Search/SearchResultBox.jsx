@@ -16,20 +16,22 @@ const SearchResultBox = () => {
       position={"absolute"} 
       zIndex={1}
       width="700px"
-      minH={"60px"}
-      bg={"gray.200"}
+      minH={"47.4px"}
+      bg={"white"}
       mt={"10px"}
+      border={'10px'}
+      borderColor={"gray"}
     >
       {results.length !== 0 ? results.map(result => {
         return (
-          <Box as={"button"} onClick={() => navigate(`/product/${result.id}`)} w="100%" mt="1px" border={`1px ${COLOR} solid`} p={["20px", "20px"]}>
+          <Box as={"button"} onClick={() => navigate(`/product/${result.id}`)} w="100%" mt="1px" p={["10px", "10px"]}>
             <Text
               textAlign={"left"}          
             ><Link to={`/product/${result.id}`}>{result.title}</Link>
             </Text>
           </Box>
         )     
-      }) : <Box mt="1px" border={`1px ${COLOR} solid`} p={["20px", "20px"]}>
+      }) : <Box mt="1px" border={`1px solid`} p={["10px", "10px"]}>
       <Text          
       >No result...
       </Text>

@@ -33,15 +33,15 @@ const AuthSlice = createSlice({
 		});
 
 		builder.addCase(getUserLoggedAsyncThunk.fulfilled, (state, action) => {
-			if (action.payload.isSuccess === false)
-			{
-				state.isSuccess = action.payload.isSuccess;
-				state.message = 'no user logged';
-			}
-			state.isSuccess = action.payload.isSuccess;
+			// if (action.payload.isSuccess === false)
+			// {
+			// 	state.isSuccess = action.payload.isSuccess;
+			// 	state.message = 'no user logged';
+			// }
+			// state.isSuccess = action.payload.isSuccess;
 			state.message = 'Logged';
-			state.email = action.payload.userName;
-			state.id = action.payload.userId;
+			// state.email = action.payload.userName;
+			// state.id = action.payload.userId;
 		});
 
 		builder.addCase(sendVerificationMailAsyncThunk.fulfilled, (state, action) => {

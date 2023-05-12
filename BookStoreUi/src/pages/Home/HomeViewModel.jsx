@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-// import { getNumberOfPageSelector, productMostSellerSelector, productSelector, productTopNewSelector } from '../../stores/reducers/ProductReducer';
 import { getNumberOfPageAsyncThunk,fetchProductAsyncThunk, fetchProductBestSellerAsyncThunk, fetchTopNewProductsAsyncThunk } from '../../stores/thunks/ProductThunk';
 import { productSelector } from '../../stores/reducers/ProductReducer';
 import { categorySelector } from '../../stores/reducers/CategoryReducer';
@@ -20,6 +19,10 @@ const HomeViewModel = () => {
 		dispatch(getNumberOfPageAsyncThunk(null))
 		dispatch(fetchCategoryAsyncThunk(null))
 	}, [dispatch])
+
+	useEffect(() => {
+		window.scrollTo(0,0)
+	},[])
 
 	useEffect(() => {	
 		dispatch(fetchProductAsyncThunk({

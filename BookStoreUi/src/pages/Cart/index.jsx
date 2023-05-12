@@ -43,8 +43,7 @@ const Cart = () => {
 		message: ''
 	},
 
-	onSubmit:  (values) => {
-		
+	onSubmit:  (values) => {		
 			createOrderAsync({values,
 				orderDetails: prepareToAddOrderProducts
 			})
@@ -56,37 +55,37 @@ const Cart = () => {
 				<Box>
 					<Box rounded={"20px"} boxShadow={"xl"} bg="white" padding={"20px"} mt={"20px"}>
 						<Box textAlign={"center"}>
-							<Text fontSize={'xl'} color={COLOR} fontWeight={"bold"}>Nhập thông tin giao hàng</Text>
+							<Text fontSize={'xl'} fontWeight={"bold"}>Nhập thông tin giao hàng</Text>
 						</Box>	
 
 						<Box display={'flex'} gap={'25px'} justifyContent={"center"} rounded={'20px'} mt={"20px"}>
 							<Box maxW={"200px"}>
-								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Thành phố:</Text>
+								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Thành phố/Tỉnh:</Text>
 								<Input id="city"
                                             name="city"
                                             value={cartForm.values.city}
-                                            onChange={cartForm.handleChange} placeholder='Nhập thành phố' border={"1px"}/>
+                                            onChange={cartForm.handleChange} placeholder='Nhập thành phố' border={"1px"} required/>
 							</Box>
 							<Box maxW={"200px"}>
-								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Quận:</Text>
+								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Quận/Huyện:</Text>
 								<Input id="district"
                                             name="district"
                                             value={cartForm.values.district}
-                                            onChange={cartForm.handleChange} placeholder='Nhập quận' border={"1px"}/>
+                                            onChange={cartForm.handleChange} placeholder='Nhập quận' border={"1px"} required/>
 							</Box>
 							<Box maxW={"200px"}>
 								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Địa chỉ: </Text>
 								<Input id="address"
                                             name="address"
                                             value={cartForm.values.address}
-                                            onChange={cartForm.handleChange} placeholder='Nhập địa chỉ' border={"1px"}/>
+                                            onChange={cartForm.handleChange} placeholder='Nhập địa chỉ' border={"1px"} required/>
 							</Box>
 							<Box maxW={"200px"}>
 								<Text fontSize={'xl'} color={COLOR} as = {'em'}>Số điện thoại:</Text>
 								<Input id="phoneNumber"
                                             name="phoneNumber"
                                             value={cartForm.values.phoneNumber}
-                                            onChange={cartForm.handleChange} placeholder='Nhập số diện thoại' border={"1px"}/>
+                                            onChange={cartForm.handleChange} placeholder='Nhập số diện thoại' border={"1px"} required/>
 							</Box>
 						</Box>			
 					</Box>
@@ -116,7 +115,7 @@ const Cart = () => {
 														id: cart.bookId,
 														title: cart.bookName,
 														quantity: cart.quantity,
-														total: cart.price
+														total: cart.price,
 													}, event) : selectProductToDelete({
 														bookId: cart.bookId
 													}, event)}

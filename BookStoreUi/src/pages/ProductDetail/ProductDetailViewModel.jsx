@@ -10,6 +10,8 @@ import { cartSelector } from '../../stores/reducers/CartReducer'
 import { addOrderAsyncThunk } from '../../stores/thunks/OrderThunk'
 import { updateCartAmmount } from '../../stores/reducers/CartReducer'
 import { fetchBookSameCateAsyncThunk } from '../../stores/thunks/ProductThunk' 
+import { useFormik } from 'formik'
+import { addReviewAsyncThunk } from '../../stores/thunks/ReviewThunk'
 
 const ProductDetailViewModel = () => {
   const dispatch = useDispatch()
@@ -31,18 +33,41 @@ const ProductDetailViewModel = () => {
   const accessTokenSaved = get({
     key: "accessToken"
   })
+  const formik = useFormik({
+    initialValues: {
+      city: '',
+      district: '',
+      address: '',
+      phoneNumber: '',
+      message: ''
+    },
+    onSubmit: (value) => {
+      dispatch(addOrderAsyncThunk({
+        token: accessTokenSaved,
+        data: {...value, paymentId: "9b9dad96-726f-4195-aacb-d952f61fca31", orderDetails: [...[], {
+          bookId : book.id,
+          quantity
+        }]}
+      }))
+      navigation("/order")
+    }
+  })
+
+  const createReviewAsync = ({
+		values,
+	}) => {
+		dispatch(addReviewAsyncThunk({
+			token: accessTokenSaved,
+			data: {
+        bookId: book.id,
+        reviewText: values.reviewText
+			}
+		}))
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [loading])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setVariantSelected(book.productVariants[0]?.productVariantName)
-      setExistQuantity(book.productVariants[0].quantity)
-      setProductVariantId(book.productVariants[0]?.productVariantId)
-    }, 500)
-  }, [book])
 
   useEffect(() => {
     setTimeout(() => {
@@ -140,11 +165,13 @@ const ProductDetailViewModel = () => {
     handleSelectVariant,
     addProductToCart,
     getVariantId,
+    createReviewAsync,
     handleVariantSelected,
     message,
-    handleBuyNow,
     loadingBuyProduct,
-    books
+    books,
+    formik,
+    dispatch
   }
 }
 
