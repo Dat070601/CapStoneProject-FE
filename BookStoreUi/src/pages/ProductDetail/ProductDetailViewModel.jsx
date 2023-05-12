@@ -23,13 +23,10 @@ const ProductDetailViewModel = () => {
   const { book } = useSelector(productSelector)
   const { isSuccessInCart, carts, message } = useSelector(cartSelector) 
   const { books} = useSelector(productSelector)
-  const [ productDefaultPrice, setProductDefaultPrice ] = useState()
-  const [ productVariantId, setProductVariantId ] = useState()
   const [ quantity, setQuantity ] = useState(1)
   const [ loading, setLoading ] = useState(true)
   const [ loadingBuyProduct, setLoadingBuyProduct ] = useState(false)
   const [ visible, setVisible ] = useState(false)
-  const [ existQuantity, setExistQuantity ] = useState()
   const accessTokenSaved = get({
     key: "accessToken"
   })
@@ -96,16 +93,6 @@ const ProductDetailViewModel = () => {
     setQuantity(prev => prev - 1)
   }
 
-  const handleSelectVariant = ({
-    existQuantity
-  }) => {
-    setExistQuantity(existQuantity)
-  }
-
-  const getVariantId = (id) => {
-    setProductVariantId(id)
-  }
-
   useEffect(() => {
     if (quantity < 1)
     {
@@ -128,49 +115,22 @@ const ProductDetailViewModel = () => {
     }, 5000)
   }
 
-  const handleBuyNow = ({ orderDetails }) => {
-    setLoadingBuyProduct(true)
-    dispatch(addOrderAsyncThunk({
-      token: accessTokenSaved,
-      data: {
-        "paymentId": "9b9dad96-726f-4195-aacb-d952f61fca31",
-        "phoneNumber": "0775587882",
-        "address": "k47/17 Trần Xuân Lê",
-        "city": "Đà Nẵng",
-        "district": "Thanh Khê",
-        orderDetails
-      }
-    }))
-    setTimeout(() => {
-      setLoadingBuyProduct(false)
-      navigation("/order")
-    }, 4000)
-  }
-
-  const handleVariantSelected = (variant) => {
-    setVariantSelected(variant)
-  }
 
   return {
+    formik,
     book,
     quantity,
     loading,
-    productVariantId,
-    accessTokenSaved,
     visible,
-    existQuantity,
     isSuccessInCart,
     increase,
+    accessTokenSaved,
     decrease,
-    handleSelectVariant,
     addProductToCart,
-    getVariantId,
-    createReviewAsync,
-    handleVariantSelected,
     message,
+    createReviewAsync,
     loadingBuyProduct,
     books,
-    formik,
     dispatch
   }
 }

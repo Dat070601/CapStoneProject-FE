@@ -60,8 +60,8 @@ const App = () => {
 				<Route path='register' element={<RegisterPage />}></Route>
 				<Route path='home' element={<Home />}></Route>
 				<Route path='product/:id' element={<ProductDetail />}></Route>
-				<Route path='verify/:email' element={<VerifyAccount />}></Route>
-				<Route path='cart'></Route>
+				{/* <Route path='verify/:email' element={<VerifyAccount />}></Route> */}
+				{/* <Route path='cart'></Route> */}
 				<Route path='cart/:userId' element={<Cart />}></Route>
 				<Route path='create-profile' element={<CreateProfile />}></Route>
 				<Route path='*' element={<NotFound />}></Route>
